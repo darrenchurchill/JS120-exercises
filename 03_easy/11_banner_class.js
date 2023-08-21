@@ -12,6 +12,7 @@
 
 class Banner {
   constructor(message) {
+    this.message = message;
   }
 
   displayBanner() {
@@ -26,9 +27,13 @@ class Banner {
     );
   }
 
-  horizontalRule() {}
+  horizontalRule() {
+    return `+-${this.message.replace(/./g, "-")}-+`;
+  }
 
-  emptyLine() {}
+  emptyLine() {
+    return `| ${this.message.replace(/./g, " ")} |`;
+  }
 
   messageLine() {
     return `| ${this.message} |`;
