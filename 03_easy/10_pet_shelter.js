@@ -10,6 +10,48 @@
  * https://launchschool.com/exercises/2b521c67
  */
 
+class Pet {
+  constructor(type, name) {
+    this.type = type;
+    this.name = name;
+  }
+}
+
+class Owner {
+  constructor(name) {
+    this.name = name;
+    this.pets = [];
+  }
+
+  adopt(pet) {
+    this.pets.push(pet);
+  }
+
+  numberOfPets() {
+    return this.pets.length;
+  }
+}
+
+class Shelter {
+  constructor() {
+    this.adoptions = {};
+  }
+
+  adopt(owner, pet) {
+    owner.adopt(pet);
+    if (!(owner.name in this.adoptions)) this.adoptions[owner.name] = [];
+    this.adoptions[owner.name].push(pet);
+  }
+
+  printAdoptions() {
+    for (let [ownerName, pets] of Object.entries(this.adoptions)) {
+      console.log(`${ownerName} has adopted the following pets:`);
+      pets.forEach((pet) => console.log(`a ${pet.type} named ${pet.name}`));
+      console.log("");
+    }
+  }
+}
+
 let butterscotch = new Pet('cat', 'Butterscotch');
 let pudding      = new Pet('cat', 'Pudding');
 let darwin       = new Pet('bearded dragon', 'Darwin');
