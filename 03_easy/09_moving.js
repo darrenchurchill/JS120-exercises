@@ -10,6 +10,12 @@
  * https://launchschool.com/exercises/6d2071cb
  */
 
+const walker = {
+  walk() {
+    return `${this.name} ${this.gait()} forward`;
+  }
+};
+
 class Person {
   constructor(name) {
     this.name = name;
@@ -19,6 +25,7 @@ class Person {
     return "strolls";
   }
 }
+Object.assign(Person.prototype, walker);
 
 class Cat {
   constructor(name) {
@@ -29,12 +36,9 @@ class Cat {
     return "saunters";
   }
 }
+Object.assign(Cat.prototype, walker);
 
-class Cheetah {
-  constructor(name) {
-    this.name = name;
-  }
-
+class Cheetah extends Cat {
   gait() {
     return "runs";
   }
