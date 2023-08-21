@@ -28,11 +28,11 @@ class Banner {
   }
 
   horizontalRule() {
-    return `+-${this.message.replace(/./g, "-")}-+`;
+    return `+-${"-".repeat(this.message.length)}-+`;
   }
 
   emptyLine() {
-    return `| ${this.message.replace(/./g, " ")} |`;
+    return `| ${" ".repeat(this.message.length)} |`;
   }
 
   messageLine() {
