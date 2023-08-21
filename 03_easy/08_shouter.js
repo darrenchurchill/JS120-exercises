@@ -13,19 +13,17 @@
  * https://launchschool.com/exercises/10d9143d
  */
 
-function Person() {
+class Person {
+  greeting(text) {
+    console.log(text);
+  }
 }
-Person.prototype.greeting = function(text) {
-  console.log(text);
-};
 
-function Shouter() {
-  Person.call(this);
+class Shouter extends Person {
+  greeting(text) {
+    super.greeting(text.toUpperCase());
+  }
 }
-Shouter.prototype = Object.create(Person.prototype)
-Shouter.prototype.greeting = function(text) {
-  Person.prototype.greeting.call(this, text.toUpperCase());
-};
 
 let person = new Person();
 let shouter = new Shouter();
