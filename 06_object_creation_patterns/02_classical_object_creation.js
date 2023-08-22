@@ -10,6 +10,15 @@
  * https://launchschool.com/exercises/a66716f6
  */
 
+function constructorProperties(constructor) {
+  return {
+    value: constructor,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  };
+}
+
 function Person(firstName, lastName, age, gender) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -42,8 +51,9 @@ function Doctor(firstName, lastName, age, gender, specialization) {
   );
   this.specialization = specialization;
 }
-Doctor.prototype = Object.create(Person.prototype);
-Doctor.prototype.constructor = Doctor;
+Doctor.prototype = Object.create(Person.prototype, {
+  constructor: constructorProperties(Doctor),
+});
 
 Doctor.prototype.diagnose = function() {
   console.log("Diagnosing");
@@ -58,8 +68,9 @@ function Professor(firstName, lastName, age, gender, subject) {
   );
   this.subject = subject;
 }
-Professor.prototype = Object.create(Person.prototype);
-Professor.prototype.constructor = Professor;
+Professor.prototype = Object.create(Person.prototype, {
+  constructor: constructorProperties(Professor),
+});
 
 Professor.prototype.teach = function() {
   console.log("Teaching");
@@ -74,8 +85,9 @@ function Student(firstName, lastName, age, gender, degree) {
   );
   this.degree = degree;
 }
-Student.prototype = Object.create(Person.prototype);
-Student.prototype.constructor = Student;
+Student.prototype = Object.create(Person.prototype, {
+  constructor: constructorProperties(Student),
+});
 
 Student.prototype.study = function() {
   console.log("Studying");
@@ -98,8 +110,9 @@ function GraduateStudent(
   );
   this.graduateDegree = graduateDegree;
 }
-GraduateStudent.prototype = Object.create(Student.prototype);
-GraduateStudent.prototype.constructor = GraduateStudent;
+GraduateStudent.prototype = Object.create(Student.prototype, {
+  constructor: constructorProperties(GraduateStudent),
+});
 
 GraduateStudent.prototype.research = function() {
   console.log("Researching");
