@@ -10,15 +10,74 @@
  * https://launchschool.com/exercises/a66716f6
  */
 
-class Person {}
+class Person {
+  constructor(firstName, lastName, age, gender) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.gender = gender;
+  }
 
-class Doctor extends Person {}
+  fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 
-class Professor extends Person {}
+  communicate() {
+    console.log("Communicating");
+  }
 
-class Student extends Person {}
+  eat() {
+    console.log("Eating");
+  }
 
-class GraduateStudent extends Student {}
+  sleep() {
+    console.log("Sleeping");
+  }
+}
+
+class Doctor extends Person {
+  constructor(firstName, lastName, age, gender, specialization) {
+    super(firstName, lastName, age, gender);
+    this.specialization = specialization;
+  }
+
+  diagnose() {
+    console.log("Diagnosing");
+  }
+}
+
+class Professor extends Person {
+  constructor(firstName, lastName, age, gender, subject) {
+    super(firstName, lastName, age, gender);
+    this.subject = subject;
+  }
+
+  teach() {
+    console.log("Teaching");
+  }
+}
+
+class Student extends Person {
+  constructor(firstName, lastName, age, gender, degree) {
+    super(firstName, lastName, age, gender);
+    this.degree = degree;
+  }
+
+  study() {
+    console.log("Studying");
+  }
+}
+
+class GraduateStudent extends Student {
+  constructor(firstName, lastName, age, gender, degree, graduateDegree) {
+    super(firstName, lastName, age, gender, degree);
+    this.graduateDegree = graduateDegree;
+  }
+
+  research() {
+    console.log("Researching");
+  }
+}
 
 let person = new Person('foo', 'bar', 21, 'gender');
 console.log(person instanceof Person);     // logs true
