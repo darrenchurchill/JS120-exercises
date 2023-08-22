@@ -11,7 +11,33 @@
  */
 
 class CircularQueue {
+  constructor(size) {
+    this.queue = Array(size).fill(null);
+    this.front = 0;
+    this.end = this.front;
+  }
 
+  isEmpty() {
+    return this.queue[this.front] === null && this.front === this.end;
+  }
+
+  isFull() {
+    return this.queue[this.front] !== null && this.front === this.end;
+  }
+
+  enqueue(element) {
+    if (this.isFull()) this.dequeue();
+    this.queue[this.front] = element;
+    this.front = (this.front + 1) % this.queue.length;
+  }
+
+  dequeue() {
+    if (this.isEmpty()) return null;
+    let result = this.queue[this.end];
+    this.queue[this.end] = null;
+    this.end = (this.end + 1) % this.queue.length;
+    return result;
+  }
 }
 
 let queue = new CircularQueue(3);
