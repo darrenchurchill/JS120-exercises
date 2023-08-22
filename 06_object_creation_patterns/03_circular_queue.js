@@ -10,32 +10,46 @@
  * https://launchschool.com/exercises/1becc424
  */
 
+class Node {
+  constructor(element, next) {
+    this.element = element;
+    this.next = next;
+  }
+}
+
 class CircularQueue {
   constructor(size) {
-    this.queue = Array(size).fill(null);
-    this.front = 0;
-    this.end = this.front;
+    this.maxSize = size;
+    this.size = 0;
+    this.first = null;
+    this.last = this.first;
   }
 
   isEmpty() {
-    return this.queue[this.front] === null && this.front === this.end;
+    return this.size === 0;
   }
 
   isFull() {
-    return this.queue[this.front] !== null && this.front === this.end;
+    return this.size === this.maxSize;
   }
 
   enqueue(element) {
     if (this.isFull()) this.dequeue();
-    this.queue[this.front] = element;
-    this.front = (this.front + 1) % this.queue.length;
+
+    let node = new Node(element, null);
+
+    if (this.isEmpty()) this.first = node;
+    else this.last.next = node;
+
+    this.last = node;
+    this.size += 1;
   }
 
   dequeue() {
     if (this.isEmpty()) return null;
-    let result = this.queue[this.end];
-    this.queue[this.end] = null;
-    this.end = (this.end + 1) % this.queue.length;
+    let result = this.first.element;
+    this.first = this.first.next;
+    this.size -= 1;
     return result;
   }
 }
