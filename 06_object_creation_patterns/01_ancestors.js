@@ -14,16 +14,9 @@
 let foo = {
   name: 'foo',
   ancestors() {
-    let result = [];
     let proto = Object.getPrototypeOf(this);
-
-    while (proto !== null) {
-      if (proto === Object.prototype) result.push("Object.prototype");
-      else result.push(proto.name);
-      proto = Object.getPrototypeOf(proto);
-    }
-
-    console.log(result);
+    if (proto === Object.prototype) return ["Object.prototype"];
+    return [proto.name].concat(proto.ancestors());
   }
 };
 
@@ -34,7 +27,7 @@ baz.name = 'baz';
 let qux = Object.create(baz);
 qux.name = 'qux';
 
-qux.ancestors();  // returns ['baz', 'bar', 'foo', 'Object.prototype']
-baz.ancestors();  // returns ['bar', 'foo', 'Object.prototype']
-bar.ancestors();  // returns ['foo', 'Object.prototype']
-foo.ancestors();  // returns ['Object.prototype']
+console.log(qux.ancestors());  // returns ['baz', 'bar', 'foo', 'Object.prototype']
+console.log(baz.ancestors());  // returns ['bar', 'foo', 'Object.prototype']
+console.log(bar.ancestors());  // returns ['foo', 'Object.prototype']
+console.log(foo.ancestors());  // returns ['Object.prototype']
