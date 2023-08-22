@@ -10,74 +10,100 @@
  * https://launchschool.com/exercises/a66716f6
  */
 
-class Person {
-  constructor(firstName, lastName, age, gender) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.gender = gender;
-  }
-
-  fullName() {
-    return `${this.firstName} ${this.lastName}`;
-  }
-
-  communicate() {
-    console.log("Communicating");
-  }
-
-  eat() {
-    console.log("Eating");
-  }
-
-  sleep() {
-    console.log("Sleeping");
-  }
+function Person(firstName, lastName, age, gender) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.age = age;
+  this.gender = gender;
 }
 
-class Doctor extends Person {
-  constructor(firstName, lastName, age, gender, specialization) {
-    super(firstName, lastName, age, gender);
-    this.specialization = specialization;
-  }
+Person.prototype.fullName = function() {
+  return `${this.firstName} ${this.lastName}`;
+};
 
-  diagnose() {
-    console.log("Diagnosing");
-  }
+Person.prototype.communicate = function() {
+  console.log("Communicating");
+};
+
+Person.prototype.eat = function() {
+  console.log("Eating");
+};
+
+Person.prototype.sleep = function() {
+  console.log("Sleeping");
+};
+
+function Doctor(firstName, lastName, age, gender, specialization) {
+  Object.getPrototypeOf(Doctor.prototype).constructor(
+    firstName,
+    lastName,
+    age,
+    gender
+  );
+  this.specialization = specialization;
 }
+Doctor.prototype = Object.create(Person.prototype);
+Doctor.prototype.constructor = Doctor;
 
-class Professor extends Person {
-  constructor(firstName, lastName, age, gender, subject) {
-    super(firstName, lastName, age, gender);
-    this.subject = subject;
-  }
+Doctor.prototype.diagnose = function() {
+  console.log("Diagnosing");
+};
 
-  teach() {
-    console.log("Teaching");
-  }
+function Professor(firstName, lastName, age, gender, subject) {
+  Object.getPrototypeOf(Professor.prototype).constructor(
+    firstName,
+    lastName,
+    age,
+    gender
+  );
+  this.subject = subject;
 }
+Professor.prototype = Object.create(Person.prototype);
+Professor.prototype.constructor = Professor;
 
-class Student extends Person {
-  constructor(firstName, lastName, age, gender, degree) {
-    super(firstName, lastName, age, gender);
-    this.degree = degree;
-  }
+Professor.prototype.teach = function() {
+  console.log("Teaching");
+};
 
-  study() {
-    console.log("Studying");
-  }
+function Student(firstName, lastName, age, gender, degree) {
+  Object.getPrototypeOf(Student.prototype).constructor(
+    firstName,
+    lastName,
+    age,
+    gender
+  );
+  this.degree = degree;
 }
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
 
-class GraduateStudent extends Student {
-  constructor(firstName, lastName, age, gender, degree, graduateDegree) {
-    super(firstName, lastName, age, gender, degree);
-    this.graduateDegree = graduateDegree;
-  }
+Student.prototype.study = function() {
+  console.log("Studying");
+};
 
-  research() {
-    console.log("Researching");
-  }
+function GraduateStudent(
+  firstName,
+  lastName,
+  age,
+  gender,
+  degree,
+  graduateDegree
+) {
+  Object.getPrototypeOf(GraduateStudent.prototype).constructor(
+    firstName,
+    lastName,
+    age,
+    gender,
+    degree
+  );
+  this.graduateDegree = graduateDegree;
 }
+GraduateStudent.prototype = Object.create(Student.prototype);
+GraduateStudent.prototype.constructor = GraduateStudent;
+
+GraduateStudent.prototype.research = function() {
+  console.log("Researching");
+};
 
 let person = new Person('foo', 'bar', 21, 'gender');
 console.log(person instanceof Person);     // logs true
