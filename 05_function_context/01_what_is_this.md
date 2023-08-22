@@ -22,4 +22,4 @@ console.log(person.fullName);
 On line 7, `person.fullName` is evaluated in the global execution context, so
 `this` is bound to the global object. The global object doesn't have a
 `firstName` or `lastName` property, so `person.fullName` evaluates to
-`undefined`. `undefined` is logged to the console.
+`undefined + undefined`, which is `NaN`. `NaN` is logged to the console.
